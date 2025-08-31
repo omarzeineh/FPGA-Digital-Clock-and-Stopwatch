@@ -118,8 +118,4 @@ All tests showed **stable, reliable performance** without missed counts or glitc
 
 👉 [YouTube Demo](https://youtu.be/nZoi-eKxg-M?si=f2RKiwQOzfBC69HJ)
 
----
 
-## 📜 License
-
-This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.  
