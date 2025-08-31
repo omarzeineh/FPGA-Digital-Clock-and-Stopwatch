@@ -1,70 +1,125 @@
 # FPGA Digital Clock and Stopwatch ⏱️
 
-This repository contains the full implementation of a **Digital Clock with Stopwatch** designed in **VHDL** and tested on an **Intel/Altera Cyclone V FPGA**.  
-The project showcases modular digital design using counters, comparators, debouncers, and display drivers, with accurate real-time performance and a stopwatch feature.
+This repository contains a **fully hand-designed digital clock with stopwatch** built entirely in **VHDL**.  
+Every module – counters, comparators, debouncers, binary-to-BCD converters, and BCD-to-seven-segment drivers – was written manually without using vendor IP cores or prebuilt blocks.  
+
+The project demonstrates the **power of FPGA-based design** for real-time digital systems and the importance of understanding **low-level hardware description**.
 
 ---
 
 ## 📖 Project Overview
-The system was developed as part of a CEN466 course project.  
-It demonstrates how **FPGA-based systems** can provide precise, efficient, and scalable digital timekeeping compared to traditional microcontroller solutions:contentReference[oaicite:0]{index=0}.
+
+The system was developed as part of a **CEN466 course project** and tested on the **Cyclone V FPGA**.  
+Its purpose is to design a **precise and scalable digital clock with stopwatch functionality**, highlighting FPGA advantages over traditional microcontroller solutions.
 
 - **Digital Clock**: Displays hours, minutes, and seconds.  
-- **Stopwatch**: Independent counters for seconds and hundredths of seconds.  
-- **User Interaction**: Pushbuttons and switches to control start, stop, reset, and display mode.  
-- **Display**: Four multiplexed 7-segment displays with Binary-to-BCD conversion.  
-- **FPGA Advantage**: Real-time, parallel processing with reliable timing and scalability:contentReference[oaicite:1]{index=1}.
+- **Stopwatch**: Tracks seconds and hundredths of seconds independently.  
+- **Manual Increment**: Buttons to set time manually.  
+- **Debouncing**: Filters noisy switch signals.  
+- **Mode Selection**: Choose between clock or stopwatch display.  
+- **Display Output**: Uses 7-segment displays for real-time visibility.  
+
+---
+
+## ✨ Key Features
+
+- Hand-written VHDL modules – no IP cores.  
+- Accurate **real-time digital clock**.  
+- Independent **stopwatch system**.  
+- **Push-button interface** for start, stop, reset, and manual time adjustment.  
+- **Switch-based mode selection** for flexible display control.  
+- **Reliable debouncing** for mechanical button noise.  
+- Human-readable output on **7-segment displays**.  
 
 ---
 
 ## 📂 Repository Structure
+
 - `accu.vhd` – Accumulator/counter module.  
-- `comparator.vhd` – Generic comparator for overflow and state transitions.  
-- `debouncer.vhd` – Stabilizes push button input signals.  
-- `binaryToBCD.vhd` – Converts binary values to BCD.  
-- `bcdtoseven.vhd` – BCD to 7-segment driver.  
-- `ADSD.vhd` – Top-level design integrating clock and stopwatch.  
+- `comparator.vhd` – Comparator for overflow detection.  
+- `debouncer.vhd` – Debounce logic for buttons.  
+- `binaryToBCD.vhd` – Binary to BCD conversion logic.  
+- `bcdtoseven.vhd` – BCD to 7-segment display driver.  
+- `ADSD.vhd` – Top-level design integrating all modules.  
 
 ---
 
-## 🛠️ Design Details
-### Key Components
-1. **Counters (accu.vhd)** – Track seconds, minutes, hours, and stopwatch values.  
-2. **Comparators (comparator.vhd)** – Detect counter limits and handle cascading increments.  
-3. **Debouncer (debouncer.vhd)** – Ensures reliable push button interaction:contentReference[oaicite:2]{index=2}.  
-4. **Converters** – Binary-to-BCD and BCD-to-Seven-Segment for display logic.  
-5. **Mode Control** – Multiplexing logic allows selecting between:
-   - Seconds/Minutes  
-   - Minutes/Hours  
-   - Stopwatch  
+## 🔧 Design Philosophy
 
-### FPGA Board
-- **Cyclone V (5CGXFC5C6F27C7N)**  
-- Push buttons for increment/reset/start/stop  
-- Switches for mode selection  
-- 7-Segment display output:contentReference[oaicite:3]{index=3}  
+### Hand-Designed Approach
+The most important aspect of this project is that **everything was designed by hand**.  
+Instead of relying on prebuilt libraries or IP blocks, each part of the system was written from scratch.  
 
----
+This gave us:
+- Full **control over hardware behavior**.  
+- A truly **modular design** that can be extended easily.  
+- A deeper **understanding of FPGA resource usage and timing**.  
 
-## 🔬 Testing and Results
-- **Digital Clock**: Verified against a real clock for accuracy.  
-- **Stopwatch**: Start, pause, resume, and reset functions worked reliably without interfering with the clock:contentReference[oaicite:4]{index=4}.  
-- **Manual Increment**: Extra feature to set hours and minutes manually.  
-- **Result**: Real-time performance, stable user inputs, and accurate display updates.  
+### Modular Blocks
+- **Accumulators** → act as counters for seconds, minutes, hours, and stopwatch ticks.  
+- **Comparators** → detect limits (like 59 seconds) and trigger resets.  
+- **Debouncers** → ensure clean button inputs.  
+- **Converters** → handle binary to BCD, then BCD to 7-segment.  
+- **Top-level integration** → connects everything into a real-time system.  
 
 ---
 
-## 📊 Analysis and Conclusion
-- FPGA-based digital clocks are **accurate, flexible, and efficient**.  
-- Modular VHDL design makes the system extensible (alarms, multi-format time, advanced displays).  
-- Lessons learned include synchronization, debouncing, and FPGA resource optimization.  
-- Potential future improvements:
-  - Integration with RTC modules (DS3231/DS1307).  
-  - Support for 12/24-hour formats.  
-  - LCD or OLED display integration.  
-  - Alarm functionality:contentReference[oaicite:5]{index=5}.  
+## 🖥️ Hardware Setup
+
+- **FPGA Board**: Cyclone V (5CGXFC5C6F27C7N).  
+- **Inputs**:  
+  - Push buttons → Start, Stop, Reset, Increment.  
+  - Switches → Select between display modes.  
+- **Outputs**:  
+  - Four multiplexed **7-segment displays**.  
+- **Software**: Quartus II for synthesis and programming.  
 
 ---
 
-## 🎥 Demo
-[YouTube Demonstration](https://youtu.be/nZoi-eKxg-M?si=f2RKiwQOzfBC69HJ)  
+## 🧪 Testing and Results
+
+### ✅ Digital Clock
+- Accurately counted seconds, minutes, and hours.  
+- Switch toggled between viewing seconds/minutes or minutes/hours.  
+
+### ✅ Stopwatch
+- Start/stop with a button.  
+- Reset with another button.  
+- Runs independently of the clock (both active at once).  
+
+### ✅ Manual Increment
+- Buttons increment minutes or hours.  
+- Makes it easier to set the clock quickly.  
+
+All tests showed **stable, reliable performance** without missed counts or glitches.  
+
+---
+
+## 📊 Lessons Learned
+
+- **Low-level design control** is invaluable.  
+- **Debouncing** is essential to avoid false triggers.  
+- **Resource efficiency** matters when scaling FPGA designs.  
+- Trial and error during synchronization taught **precision and patience**.  
+
+---
+
+## 🚀 Future Improvements
+
+- Add an **alarm system**.  
+- Support both **12-hour and 24-hour formats**.  
+- Integrate an **RTC module** for long-term accuracy.  
+- Replace 7-segment with **LCD or OLED displays**.  
+- Add **multiple stopwatch laps/splits**.  
+
+---
+
+## 🎥 Demonstration
+
+👉 [YouTube Demo](https://youtu.be/nZoi-eKxg-M?si=f2RKiwQOzfBC69HJ)
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.  
