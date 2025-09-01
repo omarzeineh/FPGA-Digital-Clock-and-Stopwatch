@@ -104,16 +104,6 @@ All tests showed **stable, reliable performance** without missed counts or glitc
 
 ---
 
-## 🚀 Future Improvements
-
-- Add an **alarm system**.  
-- Support both **12-hour and 24-hour formats**.  
-- Integrate an **RTC module** for long-term accuracy.  
-- Replace 7-segment with **LCD or OLED displays**.  
-- Add **multiple stopwatch laps/splits**.  
-
----
-
 ## 🎥 Demonstration
 
 👉 [YouTube Demo](https://youtu.be/nZoi-eKxg-M?si=f2RKiwQOzfBC69HJ)
